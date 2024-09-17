@@ -13,26 +13,26 @@ const Form = ({bookings, setBookings}) => {
     const addBooking = (ev) =>{
         ev.preventDefault();
 
-        axios.get('http://localhost/linktic-prueba/reservation/public/booking/', booking)
-        .then((payload) =>{
-            console.log(payload.data)
-            // setBookings([
-            //     ...bookings,
-            //     payload.data.data
-            // ])
-            // setBooking(initialBookings);
+        // axios.get('http://localhost/linktic-prueba/reservation/public/booking/', booking)
+        // .then((payload) =>{
+        //     console.log(payload.data)
+        //     // setBookings([
+        //     //     ...bookings,
+        //     //     payload.data.data
+        //     // ])
+        //     // setBooking(initialBookings);
 
-        }).catch((errors) =>{});
+        // }).catch((errors) =>{});
         
-        // if( booking.user.trim() === "" || booking.email.trim() === ""){return}
-        // console.log(Math.max(...bookings.map(booking => booking.id))+1);
-        // setBookings([
-        //     ...bookings,
-        //     {
-        //         ...booking,
-        //         id: bookings.lenght > 0 ? Math.max(...bookings.map(booking => booking.id))+1 : 1 
-        //     }
-        // ])
+        if( booking.user.trim() === "" || booking.email.trim() === ""){return}
+        console.log(Math.max(...bookings.map(booking => booking.id))+1);
+        setBookings([
+            ...bookings,
+            {
+                ...booking,
+                id: bookings.lenght > 0 ? Math.max(...bookings.map(booking => booking.id))+1 : 1 
+            }
+        ])
 
     }
 
