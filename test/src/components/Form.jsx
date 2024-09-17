@@ -1,5 +1,6 @@
-import {React, useState} from 'react';
+import React, { useState, useEffect } from 'react'; // Correct single import statement
 import axios from 'axios';
+
 
 const Form = ({bookings, setBookings}) => {
     
@@ -10,29 +11,46 @@ const Form = ({bookings, setBookings}) => {
             dateOut: ''
     }
     const [booking, setBooking] = useState(initialBookings);
+
+
+    // Move useEffect here, at the top level of the component
+    useEffect(() => {
+        // This effect runs on component mount
+        // Example logic
+    }, []);
     const addBooking = (ev) =>{
         ev.preventDefault();
-
-        // axios.get('http://localhost/linktic-prueba/reservation/public/booking/', booking)
-        // .then((payload) =>{
-        //     console.log(payload.data)
-        //     // setBookings([
-        //     //     ...bookings,
-        //     //     payload.data.data
-        //     // ])
-        //     // setBooking(initialBookings);
-
-        // }).catch((errors) =>{});
+          // Use useEffect logic directly here instead of calling useEffect
+          axios.post('http://localhost/linktic-prueba/reservation/public/booking/', booking)
+          .then(response => {
+              console.log('Booking added:', response.data);
+          })
+          .catch(error => {
+              if (error.response) {
+                  // Server responded with a status other than 2xx
+                  console.error('Error data:', error.response.data);
+                  console.error('Error status:', error.response.status);
+                  console.error('Error headers:', error.response.headers);
+              } else if (error.request) {
+                  // Request was made but no response
+                  console.error('Error request:', error.request);
+              } else {
+                  // Something else happened
+                  console.error('Error message:', error.message);
+              }
+              console.error('Error config:', error.config);
+          });
         
-        if( booking.user.trim() === "" || booking.email.trim() === ""){return}
-        console.log(Math.max(...bookings.map(booking => booking.id))+1);
-        setBookings([
-            ...bookings,
-            {
-                ...booking,
-                id: bookings.lenght > 0 ? Math.max(...bookings.map(booking => booking.id))+1 : 1 
-            }
-        ])
+        
+        // if( booking.user.trim() === "" || booking.email.trim() === ""){return}
+        // console.log(Math.max(...bookings.map(booking => booking.id))+1);
+        // setBookings([
+        //     ...bookings,
+        //     {
+        //         ...booking,
+        //         id: bookings.lenght > 0 ? Math.max(...bookings.map(booking => booking.id))+1 : 1 
+        //     }
+        // ])
 
     }
 
