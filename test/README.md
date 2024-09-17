@@ -2,9 +2,6 @@
 *--------------------------------------------------*
 Instalacion.
 Frontend, clone el repositorio desde (branch: Dev) y arranque con npm start para que inicie la visualización.
-
-Backend, clone el repositorio en un ambiente apache(branch services), configurar la db en el archivo principal database.php o .env, correr archivo db.sql en un motor mysql
-
 ----------------------------------------------------
 
 Aplicación Frontend (React):
